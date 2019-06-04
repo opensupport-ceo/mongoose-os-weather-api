@@ -1,0 +1,127 @@
+author: mongoose-os
+description: A Mongoose OS app skeleton
+version: 1.0
+
+libs_version: ${mos.version}
+modules_version: ${mos.version}
+mongoose_os_version: ${mos.version}
+platform: esp32
+
+# Optional. List of tags for online search.
+tags:
+  - c
+  - js
+  - aws
+  - arduino
+  - vfs
+  - docs:drivers:VFS (SPI NOR Flash)
+
+# List of files / directories with C sources. No slashes at the end of dir names.
+sources:
+  - src
+
+# List of dirs. Files from these dirs will be copied to the device filesystem
+filesystem:
+  - fs
+
+# Custom configuration entries, settable via "device configuration"
+# Below is a custom firmware configuration example.
+# Uncomment and modify according to your needs:
+
+# config_schema:
+#  - ["my_app", "o", {title: "My app custom settings"}]
+#  - ["my_app.bool_value", "b", false, {title: "Some boolean value"}]
+#  - ["my_app.string_value", "s", "", {title: "Some string value"}]
+#  - ["my_app.int_value", "i", 123, {title: "Some integer value"}]
+
+config_schema:
+  
+  - ["wifi.sta.enable", true]
+  - ["wifi.sta.ssid", "U+NetB423"]
+  - ["wifi.sta.pass", "0105015498"]
+  
+  - ["i2c.enable", true]
+  - ["sntp.enable", "b", true, {title: "Enable SNTP"}]
+  - ["spi.enable", true]
+  
+  - ["device.owner", "s", "", {title: "owner id"}]
+  - ["sys.wdt_timeout", -1]
+
+  # Built-in LED & button
+  - ["board.led1.pin", 2]
+  - ["board.btn1.pin", 0]
+  - ["board.btn1.pull_up", true]
+  - ["provision.btn.pin", 0]
+  - ["provision.btn.pull_up", true]
+
+  # LED & button for test
+  - ["board.ledtest.pin", "i", 14, {title: "test LED pin"}]
+  - ["board.btntest.pin", "i", 26, {title: "test button pin"}]
+  - ["board.btntest.pull_up", true]  
+
+  # mDash
+  - ["mqtt.server", "iot.eclipse.org:1883"]
+  - ["dash.enable", true]
+  - ["dash.token", "fDwaMvL190z3X90IUyzC0cUA"]
+
+  # Other SPI interface options go here.
+  - ["devtab.dev0.name", "spif0"]
+  - ["devtab.dev0.type", "w25xxx"]
+  - ["devtab.dev0.opts", '{"cs": 0, "freq": 20000000}']
+  - ["fstab.fs0.dev", "spif0"]
+  - ["fstab.fs0.type", "LFS"]
+  - ["fstab.fs0.opts", '{"bs": 262144, "is": 2048}']
+  - ["fstab.fs0.path", "/data"]
+  - ["fstab.fs0.create", true]
+  - ["http.document_root", "/data/"]
+
+# These settings get compiled into the C structure, and can be accessed
+# from the C code this way:
+#
+# printf("Hello from %s!\n", mgos_sys_config_get_device_id());
+#
+# Settings are cool: can be modified remotely without full firmware upgrade!
+#
+# To see all available compiled settings, buid the firmware and open
+# build/gen/mgos_config.h file.
+#
+# Also, in this config_schema section, you can override existing
+# settings that has been created by other libraries. For example, debug log
+# level is 2 by default. For this firmware we can override it to 3:
+#
+# config_schema:
+#  - ["debug.level", 3]
+
+libs:
+  - origin: https://github.com/mongoose-os-libs/boards
+  - origin: https://github.com/mongoose-os-libs/wifi
+  - origin: https://github.com/mongoose-os-libs/fstab
+  - origin: https://github.com/mongoose-os-libs/vfs-dev-spi-flash
+  - origin: https://github.com/mongoose-os-libs/vfs-fs-lfs
+  - origin: https://github.com/mongoose-os-libs/ca-bundle
+  - origin: https://github.com/mongoose-os-libs/rpc-service-config
+  - origin: https://github.com/mongoose-os-libs/rpc-service-fs
+  - origin: https://github.com/mongoose-os-libs/rpc-uart
+  - origin: https://github.com/mongoose-os-libs/dht
+  - origin: https://github.com/mongoose-os-libs/mjs
+  - origin: https://github.com/mongoose-os-libs/http-server
+  - origin: https://github.com/mongoose-os-libs/wifi
+  - origin: https://github.com/mongoose-os-libs/pwm
+  - origin: https://github.com/mongoose-os-libs/adc
+  - origin: https://github.com/mongoose-os-libs/sntp
+  - origin: https://github.com/mongoose-os-libs/ds3231
+  - origin: https://github.com/mongoose-os-libs/spi
+  - origin: https://github.com/mongoose-os-libs/vfs-dev-w25xxx
+  - origin: https://github.com/mongoose-os-libs/arduino-compat
+  - origin: https://github.com/mongoose-os-libs/dash
+  - origin: https://github.com/mongoose-os-libs/aws
+  - origin: https://github.com/mongoose-os-libs/core
+  - origin: https://github.com/mongoose-os-libs/provision
+  - origin: https://github.com/mongoose-os-libs/rpc-service-gpio
+  - origin: https://github.com/mongoose-os-libs/rpc-ws
+  - origin: https://github.com/mongoose-os-libs/shadow
+  - origin: https://github.com/mongoose-os-libs/sntp
+
+
+# Used by the mos tool to catch mos binaries incompatible with this file format
+manifest_version: 2017-09-29

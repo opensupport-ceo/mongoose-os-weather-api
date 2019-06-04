@@ -1,0 +1,11 @@
+build
+build/*
+deps
+build.log
+.DS_Store
+core-*
+verificationCert*
+aws-esp32*
+.vscode
+.vscode/*
+*.bak
