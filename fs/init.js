@@ -10,7 +10,7 @@ load('api_gpio.js');
 load('api_shadow.js');
 
 ////////////////////////////////////////
-
+/*
 load('led.js');
 load('alarm.js');
 load('time.js');
@@ -18,6 +18,7 @@ load('thermistor.js');
 load('qicharger.js');
 load('battery.js');
 load('mic.js');
+*/
 ////////////////////////////////////////
 
 
@@ -169,15 +170,15 @@ Timer.set(5000, Timer.REPEAT, function() {
 //let checkBatStatus = ffi('int checkBatStatus(void)');
 //let checkQiStatus = ffi('int checkQiStatus(void)');
 //let I2SInit = ffi('void I2SInit(void)');
-let setTargetTemp = ffi('void setTargetTemp(float)');
+//let setTargetTemp = ffi('void setTargetTemp(float)');
 
 
-Qi.enable();
-Battery.enable();
-Mic.enable();
+//Qi.enable();
+//Battery.enable();
+//Mic.enable();
 
-LED.setBrightness(1, 0);
-LED.setBrightness(2, 0);
+//LED.setBrightness(1, 0);
+//LED.setBrightness(2, 0);
 
 /*
 Timer.set(3000 , true , function() {
