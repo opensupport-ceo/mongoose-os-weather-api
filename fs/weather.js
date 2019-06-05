@@ -14,6 +14,7 @@ load('time2.js');
 //let replace = ffi('char *replace(char *s, const char *olds, const char *news)');
 
 let Weather = {
+    Reported: false,
     RainorSnow: 0,
     rainState: 0,
     rainCapa: 0,
@@ -24,12 +25,13 @@ let Weather = {
 
         let jsonObj = JSON.parse(response);
         print("Weather jsonObj: ",jsonObj);
-        if(jsonObj[0].response.body.totalCount !== 0){
-            Weather.RainorSnow = jsonObj[0].response.body.items.item[0].fcstValue;
-            Weather.rainState = jsonObj[0].response.body.items.item[1].fcstValue;
-            Weather.rainCapa = jsonObj[0].response.body.items.item[3].fcstValue;
-            Weather.skyState = jsonObj[0].response.body.items.item[4].fcstValue;
-            Weather.Temp = jsonObj[0].response.body.items.item[5].fcstValue;
+        if(jsonObj.response.body.totalCount !== 0){
+            Weather.RainorSnow = jsonObj.response.body.items.item[0].fcstValue;
+            Weather.rainState = jsonObj.response.body.items.item[1].fcstValue;
+            Weather.rainCapa = jsonObj.response.body.items.item[3].fcstValue;
+            Weather.skyState = jsonObj.response.body.items.item[4].fcstValue;
+            Weather.Temp = jsonObj.response.body.items.item[5].fcstValue;
+            Weather.Reported = true;
             return true;
         }else{
             print("Could not get weather info.");
@@ -88,7 +90,7 @@ let Weather = {
         //print("nx: ", nx,"nxStr: ", nxStr);
         let nyStr = JSON.stringify(ny);
         //print("ny: ", ny, "nxStr: ", nxStr);
-        let apikey = 'GsIEPvrEMExP3XquMGH1bYL8tixNTFkfjICqMXpMg3z2%2Fm3GzrMkyvfkwMdk6bidaAPFrsJrojC829XMl0anMQ%3D%3D';
+        let apikey = 'API-Key';
         let todayStr = yearStr + '' + monthStr + '' + dayStr;
         let basetimeStr = hourStr + '00';
         let forecastURL = 'http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData';
@@ -100,7 +102,7 @@ let Weather = {
         forecastURL += '&_type=json';
               
         print("forecastURL: ", forecastURL);
-        /*
+        
         HTTP.query({
             url: forecastURL,
             success: function(body, full_http_msg) { 
@@ -111,17 +113,18 @@ let Weather = {
                 print(err); 
             },
         });
-        */
-
-        return true;
     },
 
     dispInfoDesc: function(){
-        print("rainState: " , Weather.rainState);
-        print("skyState: " , Weather.skyState); // -
-        print("RainorSnow: ", Weather.RainorSnow); // -    
+        if(Weather.Reported === false){
+            print("Weather.Reported: false");
+            return;
+        }
+        print("rainState: " , Weather.rainState); // "-"
+        print("skyState: " , Weather.skyState); // "-"
+        print("RainorSnow: ", Weather.RainorSnow); // "-"    
         print("rain capacity: ", Weather.RainorSnow);
-        print("Temp: ", Weather.Temp);
+        print("Temp: ", Weather.Temp); //"-"
 
         /*
         if (Weather.rainState === 0) {

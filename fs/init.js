@@ -214,26 +214,28 @@ let resultTxt = '{  "ip": "122.47.26.50",  "city": "Sogongdong",  "country": "KR
 
 Timer.set(10*1000, Timer.REPEAT, function() {
   print("getting weather informations...");
-  //ipGeoLoc.parse(resultTxt);
+  ipGeoLoc.parse(resultTxt); // for test.
 
-  //if(ipGeoLoc.getInfo()){
-  //  ipGeoLoc.displayInfoDesc();
+  //ipGeoLoc.getInfo(); // for real condition.
+  if(ipGeoLoc.Reported){
+    ipGeoLoc.displayInfoDesc();
     
     if((ipGeoLoc.lat !== 0) &&(ipGeoLoc.lng !== 0)){
       print("lati: ", ipGeoLoc.lat, "longi: ", ipGeoLoc.lng);
       let rs = LCCDFS.conversion("toXY",ipGeoLoc.lat, ipGeoLoc.lng);
       print("rs.nx: ", rs.nx, "rs.ny: ", rs.ny);
       
-      if(Weather.getInfoItems(rs.nx, rs.ny)){
-        //Weather.dispInfoDesc();  
+      Weather.getInfoItems(rs.nx, rs.ny)
+      if(Weather.Reported){
+        Weather.dispInfoDesc();  
       }else{
         print("Could not get weather info.");
       }
     }
     
-  //}else{
-  //  print("Could not get ipAddr & geoLoc.");
-  //}
+  }else{
+    print("Could not get ipAddr & geoLoc.");
+  }
   
 },null);
 

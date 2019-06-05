@@ -21,11 +21,11 @@
 #include "mgos.h"
 #include "mgos_time.h"
 #include "mgos_spi.h"
-#include "battery.h"
+//#include "battery.h"
 #include "mgos_http_server.h"
 #include "mgos_rpc.h"
-#include "Audio.h"
-#include "thermistor.h"
+//#include "Audio.h"
+//#include "thermistor.h"
 #include <Arduino.h>
 
 #define SD_CS          5
@@ -155,7 +155,7 @@ done:
 }
 
 
-Audio audio;
+//Audio audio;
 
 
 
@@ -174,12 +174,14 @@ static void mp3_handler(struct mg_rpc_request_info *ri, void *cb_arg,
     mg_rpc_send_responsef(ri, "opened file %s \n ", path);
     fclose(fp);
   }*/
+
+  /*
   bool res = playMP3File(path);
   if (res){
     goto done;
   } else {
   }
-
+  */
   (void) cb_arg;
   (void) fi;
 
@@ -205,7 +207,7 @@ enum mgos_app_init_result mgos_app_init(void) {
                      "{url: %Q, uart: %d, file: %Q}", fetch_handler, NULL);
 
   // initiate functions
-  thermistorInit();
+  //thermistorInit();
 
   //for (int i=0; i<10; i++){
     //audio.instantiateAudio();

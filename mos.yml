@@ -37,7 +37,7 @@ filesystem:
 config_schema:
   
   - ["wifi.sta.enable", true]
-  - ["wifi.sta.ssid", "U+NetB423"]
+  - ["wifi.sta.ssid", "U+NetB324"]
   - ["wifi.sta.pass", "0105015498"]
   
   - ["i2c.enable", true]
