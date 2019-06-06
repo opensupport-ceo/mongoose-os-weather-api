@@ -185,8 +185,10 @@ static void mp3_handler(struct mg_rpc_request_info *ri, void *cb_arg,
   (void) cb_arg;
   (void) fi;
 
+/*
 done:
   free(path);
+  */
 }
 
 enum mgos_app_init_result mgos_app_init(void) {
